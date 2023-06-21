@@ -15,7 +15,7 @@ public class ReadBrowserAndURLFromFile {
 
 
     public static String getData (String keyName) throws ParserConfigurationException, IOException, SAXException {
-        File configXmlFile = new File("C:\\Automation\\ForProject\\browserAndUrl.xml");
+        File configXmlFile = new File("C:\\Users\\avivit\\Documents\\GitHub\\BuyMeProject\\browserAndUrl.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
 

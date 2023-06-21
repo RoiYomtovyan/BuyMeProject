@@ -8,10 +8,11 @@ public class RegistrationPage {
 
     public static WebElement element;
 
+
     // the register \ login page link
     public  static WebElement pressLogin (WebDriver driver){
-        //element=driver.findElement(By.cssSelector ("span[class=\"seperator-link\"]"));
-        element = driver.findElement(By.className("seperator-link"));
+        element=driver.findElement(By.cssSelector ("li.notSigned"));
+//        element = driver.findElement(By.xpath("//li//a//span[contains(text(),'כניסה / הרשמה')]"));
         return element;
     }
 
