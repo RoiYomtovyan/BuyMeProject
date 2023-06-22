@@ -1,0 +1,6 @@
+{
+  "api": {
+    "url": "http://api.weatherapi.com/v1/current.json?key=ddbdc26e557b43c09b853941232206&q=",
+    "urlSuffix": "&aqi=no"
+  }
+}
