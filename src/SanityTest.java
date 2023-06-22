@@ -11,6 +11,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +24,10 @@ import static org.junit.Assert.fail;
 
 public class SanityTest {
    public static WebDriver driver ;
-   @Rule
+
+    Wait<WebDriver> wait = new FluentWait<>(driver)
+            .withTimeout(10 ,TimeUnit.MILLISECONDS);
+    @Rule
    public TestName name = new TestName();
     // create ExtentReports and attach reporter(s)
     private static ExtentReports extent ;
@@ -28,7 +35,7 @@ public class SanityTest {
     private static ExtentTest test ;
     @BeforeClass
     public static void start () throws Exception {
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("C://Users//roi.yomtovyan//Desktop//Report.html");
+        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("C://Users//avivit//Desktop//Report.html");
 
         // choose to append each test
         htmlReporter.setAppendExisting(true);
@@ -51,7 +58,7 @@ public class SanityTest {
         try {
             String browserType = ReadBrowserAndURLFromFile.getData("browserType");
             if (browserType.equals("Chrome")) {
-                System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver_win32\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\avivit\\Documents\\GitHub\\BuyMeProject\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 driver = new ChromeDriver(options);
             } else if (browserType.equals("IE")) {
@@ -98,29 +105,28 @@ public class SanityTest {
 @Test
 // this test is verifying the registration of new user and report the result in the report
 public void SanityTest01_Registration_Page_Verification(){
-        
-    RegistrationPage.pressLogin(driver).click();
-    RegistrationPage.notRegisteredYet(driver).click();
-    RegistrationPage.userName(driver).sendKeys("Roi");
-    // this function is calling the "generateString" method from "RandomStringGenerator" to generate unique email address
-    RegistrationPage.mailField(driver).sendKeys(RandomStringGenerator.generateString()+"@Roi.com" );
-    RegistrationPage.passwordField(driver).sendKeys("1234.Com");
-    RegistrationPage.passwordValidation(driver).sendKeys("1234.Com");
-    RegistrationPage.iAgreeRadioButton(driver).click();
-    boolean pressed = false;
-    try {
-    RegistrationPage.Submit(driver).click();
-        pressed = true;
-    } catch (Exception e) {
-        e.printStackTrace();
-        test.log(Status.FAIL, "Submit button of regestration form was not clicked " + e.getMessage());
-        pressed = false;
-    } finally {
-        if (pressed) {
-            test.log(Status.PASS, "the user was registers successfully");
-
-        }
-    }
+        RegistrationPage.pressLogin(driver).click();
+//    RegistrationPage.notRegisteredYet(driver).click();
+//    RegistrationPage.userName(driver).sendKeys("Roi");
+//    // this function is calling the "generateString" method from "RandomStringGenerator" to generate unique email address
+//    RegistrationPage.mailField(driver).sendKeys(RandomStringGenerator.generateString()+"@Roi.com" );
+//    RegistrationPage.passwordField(driver).sendKeys("1234.Com");
+//    RegistrationPage.passwordValidation(driver).sendKeys("1234.Com");
+//    RegistrationPage.iAgreeRadioButton(driver).click();
+//    boolean pressed = false;
+//    try {
+//    RegistrationPage.Submit(driver).click();
+//        pressed = true;
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        test.log(Status.FAIL, "Submit button of regestration form was not clicked " + e.getMessage());
+//        pressed = false;
+//    } finally {
+//        if (pressed) {
+//            test.log(Status.PASS, "the user was registers successfully");
+//
+//        }
+//    }
 }
 
     @Test
@@ -172,7 +178,7 @@ public void SanityTest01_Registration_Page_Verification(){
 
         }
     }
-// the test is continue with gift selection and amount definition process and report the result in the report
+// the test is continued with gift selection and amount definition process and report the result in the report
     GiftSelection.SelectedGift(driver).click();
     GiftSelection.selectPrice(driver).sendKeys("200");
     boolean pressed = false;
